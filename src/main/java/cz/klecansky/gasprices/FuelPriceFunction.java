@@ -26,6 +26,7 @@ public class FuelPriceFunction implements Supplier<Map<Country, CountryFuelPrice
         Map<Country, CountryFuelPrice> countryCountryFuelPriceMap = fuelPriceService.allCountriesFuelPrices();
         try {
             fuelPriceMailSendingService.sendMailFuelPrices(countryCountryFuelPriceMap);
+            logger.info("Email was sent.");
         } catch (MessagingException e) {
             logger.error("Error when sending email: ", e);
             throw new RuntimeException(e);

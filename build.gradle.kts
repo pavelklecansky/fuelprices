@@ -1,11 +1,17 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
 
+
+val springCloudFunctionVersion = "4.0.4"
+val springCloudAwsVersion = "3.0.0"
+val jteVersion = "2.3.0"
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.1.1"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("com.github.johnrengelman.shadow") version "8.1.1"
+	id("gg.jte.gradle") version "2.3.0"
 }
 
 group = "cz.klecansky"
@@ -19,8 +25,6 @@ repositories {
 	mavenCentral()
 }
 
-val springCloudFunctionVersion = "4.0.4"
-val springCloudAwsVersion = "3.0.0"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
@@ -30,8 +34,8 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-function-adapter-aws:${springCloudFunctionVersion}")
 	implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}"))
 	implementation("io.awspring.cloud:spring-cloud-aws-starter-ses")
-	implementation("gg.jte:jte-spring-boot-starter-3:3.0.0")
-	implementation("gg.jte:jte:3.0.0")
+	implementation("gg.jte:jte-spring-boot-starter-3:${jteVersion}")
+	implementation("gg.jte:jte:${jteVersion}")
 	implementation("com.amazonaws:aws-lambda-java-events:3.9.0")
 	implementation("org.springframework.boot:spring-boot-configuration-processor:3.0.5")
 	implementation("org.jsoup:jsoup:1.16.1")
@@ -64,8 +68,19 @@ tasks {
 	}
 }
 
+jte {
+	generate()
+}
+
 tasks {
 	assemble {
 		dependsOn(shadowJar)
 	}
+}
+
+tasks.jar {
+	dependsOn(tasks.precompileJte)
+	from(fileTree("jte-classes") {
+		include("**/*.bin")
+	})
 }
