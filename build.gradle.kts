@@ -24,11 +24,14 @@ val springCloudAwsVersion = "3.0.0"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.cloud:spring-cloud-function-context:${springCloudFunctionVersion}")
 	implementation("org.springframework.cloud:spring-cloud-function-adapter-aws:${springCloudFunctionVersion}")
 	implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}"))
 	implementation("io.awspring.cloud:spring-cloud-aws-starter-ses")
+	implementation("gg.jte:jte-spring-boot-starter-3:3.0.0")
+	implementation("gg.jte:jte:3.0.0")
 	implementation("com.amazonaws:aws-lambda-java-events:3.9.0")
 	implementation("org.springframework.boot:spring-boot-configuration-processor:3.0.5")
 	implementation("org.jsoup:jsoup:1.16.1")
