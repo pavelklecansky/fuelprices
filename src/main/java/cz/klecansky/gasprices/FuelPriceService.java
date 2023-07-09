@@ -36,8 +36,9 @@ public class FuelPriceService {
         return COUNTRIES_FUEL_PRICES_URLS.keySet().stream()
                 .map(s -> {
                     try {
+                        Thread.sleep(1000);
                         return Map.entry(s, countryFuelPrice(s));
-                    } catch (IOException ex) {
+                    } catch (Exception ex) {
                         logger.error("Error when getting fuel prices for: " + s, ex);
                         throw new RuntimeException(ex);
                     }
