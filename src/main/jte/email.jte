@@ -19,16 +19,16 @@
 <table>
     <tr>
         <th style="padding: 0 5px;"></th>
-        <th style="padding: 0 5px;">Benzín</th>
-        <th style="padding: 0 5px;">Nafta</th>
+        <th style="padding: 0 5px;">Diesel</th>
         <th style="padding: 0 5px;">LPG</th>
+        <th style="padding: 0 5px;">Benzín</th>
     </tr>
     @for(Map.Entry<Country, CountryFuelPrice> entry : prices.entrySet().stream().sorted(Map.Entry.comparingByKey()).toList())
         <tr>
             <td style="padding: 0 5px;">${entry.getKey().getName()}</td>
-            <td style="padding: 0 5px;">${entry.getValue().gasolinePrice().price()} ${entry.getValue().gasolinePrice().currency().getCurrencyCode()}</td>
             <td style="padding: 0 5px;">${entry.getValue().dieselPrice().price()} ${entry.getValue().dieselPrice().currency().getCurrencyCode()}</td>
             <td style="padding: 0 5px;">${entry.getValue().LPGPrice().price()} ${entry.getValue().LPGPrice().currency().getCurrencyCode()}</td>
+            <td style="padding: 0 5px;">${entry.getValue().gasolinePrice().price()} ${entry.getValue().gasolinePrice().currency().getCurrencyCode()}</td>
         </tr>
     @endfor
 </table>
