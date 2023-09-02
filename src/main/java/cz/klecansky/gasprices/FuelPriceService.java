@@ -61,14 +61,6 @@ public class FuelPriceService {
         return new CountryFuelPrice(country, gasolinePrice, dieselPrice, LPGPrice);
     }
 
-    public static void main(String[] args) throws IOException {
-        FuelPriceService fuelPriceService = new FuelPriceService();
-        Map<Country, CountryFuelPrice> countryCountryFuelPriceMap = fuelPriceService.allCountriesFuelPrices();
-        for (CountryFuelPrice value : countryCountryFuelPriceMap.values()) {
-            System.out.println(value);
-        }
-    }
-
     private Price extractGasolinePrice(Document document) {
         String extractedGasolinePrice = document.select("body > div:nth-child(3) > div:nth-child(4) > div > table > tbody > tr:nth-child(2) > td:nth-child(2) > span").text();
         return extractPriceFromText(extractedGasolinePrice);
